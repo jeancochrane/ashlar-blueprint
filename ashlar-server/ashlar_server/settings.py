@@ -13,21 +13,13 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-try:
-    from settings_local import (
-        SECRET_KEY,
-        DEBUG,
-        ALLOWED_HOSTS,
-        DATABASES,
-        DEVELOP
-    )
-except ImportError as e:
-    raise ImportError('One or more local settings are missing. Make sure that ' +
-                      "you've created a settings_local.py file and defined the " +
-                      'variables SECRET_KEY, DEBUG, ALLOWED_HOSTS, DATABASES, ' +
-                      'and DEVELOP.')
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Retrieve secret variables from the environment
+SECRET_KEY = os.environ.get('SECRET_KEY', 'extra-secret')
+DEBUG = os.environ.get('DEBUG', True)
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', [])
+DEVELOP = os.environ.get('DEVELOP', True)
 
 # Application definition
 
@@ -72,6 +64,19 @@ TEMPLATES = [
         },
     },
 ]
+
+# Default database variables correspond to the development database set up
+# in docker-compose.yml
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': os.environ.get('DB_NAME', 'postgres'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'HOST': os.environ.get('DB_HOST', 'db'),
+        'PASSWORD': os.environ.get('DB_PASS', ''),
+        'PORT': os.environ.get('DB_PORT', '5432')
+    }
+}
 
 WSGI_APPLICATION = 'ashlar_server.wsgi.application'
 
