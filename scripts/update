@@ -24,5 +24,8 @@ then
 
         # Run database migrations
         docker-compose run ashlar-server manage.py migrate
+
+		# Install NPM modules
+        docker-compose run --rm --no-deps schema-editor yarn
     fi
 fi
