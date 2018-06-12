@@ -22,7 +22,7 @@ then
         # Build containers.
         docker-compose build
 
-		# Run database migrations
-		docker-compose run --entrypoint="python manage.py migrate" ashlar-server
+        # Run database migrations
+        docker-compose run --entrypoint="python manage.py migrate" ashlar-server
     fi
 fi
