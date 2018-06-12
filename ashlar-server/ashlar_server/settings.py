@@ -15,11 +15,25 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Retrieve secret variables from the environment
+# Retrieve secret variables from the environment.
 SECRET_KEY = os.environ.get('SECRET_KEY', 'extra-secret')
-DEBUG = os.environ.get('DEBUG', True)
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', [])
-DEVELOP = os.environ.get('DEVELOP', True)
+
+# Check for allowed hosts (user can define up to 10 in the .env file).
+ALLOWED_HOSTS = []
+for i in range(1,11):
+    allowed_host = 'ALLOWED_HOST_%d' % i
+    if os.environ.get(allowed_host):
+        ALLOWED_HOSTS.append(allowed_host)
+
+if os.environ.get('DEBUG') and os.environ.get('DEBUG').lower() == 'true':
+    DEBUG = True
+else:
+    DEBUG = False
+
+if os.environ.get('DEVELOP') and os.environ.get('DEVELOP').lower() == 'false':
+    DEVELOP = False
+else:
+    DEVELOP = True
 
 # Application definition
 

@@ -12,3 +12,4 @@ services:
     command: ashlar_server.wsgi -w3 -b:8000 -kgevent
     ports:
       - "8000:8000"
+    env_file: ./ashlar-server/.env
