@@ -114,4 +114,3 @@ STATIC_URL = '/static/'
 
 # Ashlar-specific global variables
 ASHLAR = { 'SRID': 4236 }
-DEVELOP = True
