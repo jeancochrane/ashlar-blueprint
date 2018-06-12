@@ -9,7 +9,4 @@ RUN apt-get update
 RUN apt-get -y autoremove && apt-get install -y libgeos-dev binutils libproj-dev gdal-bin
 
 RUN $bin/pip install pip==9.0.1
-RUN $bin/pip install --process-dependency-links -e git+https://github.com/jeancochrane/ashlar.git@update-dependencies#egg=ashlar
-
-RUN $bin/python manage.py migrate
-CMD $bin/python manage.py runserver
+RUN $bin/pip install --process-dependency-links git+https://github.com/jeancochrane/ashlar.git@update-dependencies#egg=ashlar

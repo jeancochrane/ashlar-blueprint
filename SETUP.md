@@ -4,7 +4,7 @@ Documenting the steps it took to set up a working Ashlar server.
 
 - `pip install pip==9.0.1`
 - `pip install --process-dependency-links -e git+https://github.com/jeancochrane/ashlar.git@update-dependencies#egg=ashlar`
-- `pip install docker-compose==1.21.2`
+- `pip install docker-compose >=1.10.0` (the first release to use v3 syntax)
 - Initialize a Django app
 - Update the settings file:
     - Define `ASHLAR` global var, set `SRID = 4326`

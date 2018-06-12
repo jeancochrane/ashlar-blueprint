@@ -13,3 +13,6 @@ services:
       - db
     volumes:
       - ./ashlar-server:/opt/ashlar-server
+    command: /bin/bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "127.0.0.1:8000:8000"
