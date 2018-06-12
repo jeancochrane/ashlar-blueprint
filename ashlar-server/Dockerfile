@@ -1,12 +1,16 @@
-FROM python:2.7
+FROM quay.io/azavea/django:1.8-python2.7-slim
 
-ENV bin /usr/local/bin/
+RUN apt-get update
+RUN apt-get -y autoremove && apt-get install -y \
+	libgeos-dev \
+	binutils \
+	libproj-dev \
+	gdal-bin \
+	git
+
+COPY requirements.txt /tmp/
+
+RUN pip install --process-dependency-links -r /tmp/requirements.txt
 
 COPY . /opt/ashlar-server
 WORKDIR /opt/ashlar-server
-
-RUN apt-get update
-RUN apt-get -y autoremove && apt-get install -y libgeos-dev binutils libproj-dev gdal-bin
-
-RUN $bin/pip install pip==9.0.1
-RUN $bin/pip install --process-dependency-links git+https://github.com/jeancochrane/ashlar.git@update-dependencies#egg=ashlar
