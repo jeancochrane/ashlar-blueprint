@@ -1,6 +1,14 @@
 # Setup
 
-Documenting the steps it took to set up a working Ashlar server.
+Documenting the steps it took to set up a working Ashlar reference
+implementation. This doc will serve as loose notes toward a few ends:
+
+1. Help set up the dev environment properly
+2. Document the steps needed to get a project going on top of Ashlar
+3. Based on the lessons learned in 2., reduce the amount of setup necessary for
+   an Ashlar project
+
+## Setting up an Ashlar container
 
 - `pip install pip==9.0.1`
 - `pip install --process-dependency-links -e git+https://github.com/jeancochrane/ashlar.git@update-dependencies#egg=ashlar`
