@@ -1,0 +1,34 @@
+#!/bin/bash
+
+set -e
+
+if [[ -n "${ASHLAR_BLUEPRINT_DEBUG}" ]]; then
+    set -x
+fi
+
+function usage() {
+    echo -n "Usage: $(basename "$0")
+
+Starts servers using docker-compose.
+"
+}
+
+if [ "${BASH_SOURCE[0]}" = "${0}" ]
+then
+    if [ "${1:-}" = "--help" ]
+    then
+        usage
+    else
+		if [[ $(sudo netstat -nlp | grep :::8000) ]];
+		then
+			echo "It appears you already have a process running on port 8000:"
+			echo
+			echo $(sudo netstat -nlp | grep :::8000)
+			echo
+			echo "Terminate that process, or alter docker-compose.yml to run the app on another port."
+			exit 1
+		else
+			docker-compose run --service-ports ashlar-server
+		fi
+    fi
+fi
