@@ -8,6 +8,7 @@
     "bundle": "rm -rf /usr/dist/* && webpack --config webpack.prod.config.js --colors && echo $VERSION > /usr/dist/version.txt",
     "dev-server": "node_modules/.bin/webpack-dev-server --config webpack.dev.config.js --inline --hot --progress --colors --host 0.0.0.0 --port 4567 --history-api-fallback",
     "test": "echo 'Error: no test specified' && exit 1",
+    "lint": "eslint .",
     "postinstall": "npm rebuild node-sass"
   },
   "repository": {
@@ -20,7 +21,8 @@
   },
   "homepage": "https://github.com/azavea/ashlar-blueprint",
   "dependencies": {
-    "axios": "~0.18.0"
+    "axios": "~0.18.0",
+    "jquery": "~3.3.1"
   },
   "devDependencies": {
     "autoprefixer": "~8.2.0",

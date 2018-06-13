@@ -6,9 +6,10 @@ var outputPath = '/usr/dist';
 
 module.exports = {
     entry: {
-        schema-editor: ['babel-polyfill', './js/src/main.js'],
+        app: ['babel-polyfill', './js/src/main.js'],
         vendor: [
             'axios',
+            'jquery'
         ],
     },
     output: {
@@ -19,8 +20,9 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Ashlar Blueprint Schema Editor',
-            filename: 'templates/schema-editor.html'
-            template: 'schema-editor.html',
+            filename: 'schema-editor.html',
+            template: 'templates/schema-editor.html',
+            inject: 'body',
         }),
         new webpack.optimize.ModuleConcatenationPlugin()
     ],
