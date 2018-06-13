@@ -15,24 +15,22 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Retrieve secret variables from the environment.
+# Retrieve secret variables from the environment, defined in the .env file.
 SECRET_KEY = os.environ.get('SECRET_KEY', 'extra-secret')
 
-# Check for allowed hosts (user can define up to 10 in the .env file).
-ALLOWED_HOSTS = []
-for i in range(1,11):
-    allowed_host = 'ALLOWED_HOST_%d' % i
-    if os.environ.get(allowed_host):
-        ALLOWED_HOSTS.append(allowed_host)
+# Check for allowed hosts, defined as a comma-separated bash string in the
+# .env file.
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
+# DEBUG and DEVELOP default to false. They should be represented as Pythonic
+# booleans in the .env file (i.e. caps first), but allow them to be lower case just
+# in case.
+DEBUG = False
 if os.environ.get('DEBUG') and os.environ.get('DEBUG').lower() == 'true':
     DEBUG = True
-else:
-    DEBUG = False
 
-if os.environ.get('DEVELOP') and os.environ.get('DEVELOP').lower() == 'false':
-    DEVELOP = False
-else:
+DEVELOP = False
+if os.environ.get('DEVELOP') and os.environ.get('DEVELOP').lower() == 'true':
     DEVELOP = True
 
 # Application definition
@@ -113,4 +111,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Ashlar-specific global variables
-ASHLAR = { 'SRID': 4236 }
+ASHLAR = { 'SRID': 4326 }

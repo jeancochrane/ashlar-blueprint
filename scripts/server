@@ -19,16 +19,16 @@ then
     then
         usage
     else
-        if [[ $(sudo netstat -nlp | grep :::8000) ]];
+        if [[ $(netstat -nlp | grep :::8000) ]];
         then
             echo "It appears you already have a process running on port 8000:"
             echo
-            echo $(sudo netstat -nlp | grep :::8000)
+            echo $(netstat -nlp | grep :::8000)
             echo
             echo "Terminate that process, or alter docker-compose.yml to run the app on another port."
             exit 1
         else
-            docker-compose run --service-ports ashlar-server
+            docker-compose run --service-ports ashlar-server manage.py runserver 0.0.0.0:8000
         fi
     fi
 fi
